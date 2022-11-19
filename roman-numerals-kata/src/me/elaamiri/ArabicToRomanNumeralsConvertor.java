@@ -60,6 +60,7 @@ public class ArabicToRomanNumeralsConvertor {
 		return roman;
 	}
 	
+	/*
 	public static String findBase(int number) {
 		if(bases.containsKey(number)) return bases.get(number);
 		int temp = number / 5;
@@ -91,5 +92,5 @@ public class ArabicToRomanNumeralsConvertor {
 		
 		return 1000;
 	}
-
+	*/
 }
