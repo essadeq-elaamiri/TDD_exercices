@@ -9,39 +9,63 @@ import java.util.Optional;
 public class Game {
 
 	
-	private List<Integer> ballScores = new ArrayList<>(Collections.nCopies(21, 0));
+	private List<Frame> frames = new ArrayList<>();
 	private int fillingIndex = 0;
+	private Frame frame;
 	
 	public void ball(int knockedDown) {
+		if(fillingIndex % 2 == 0 ) {
+			frame = new Frame();
+			frame.firstBall = knockedDown;
+			if(knockedDown == 10) {
+				frame.secondBall = 0;
+			}
+			frames.add(frame);
+		}
+		else {
+			frames.get(fillingIndex-1).secondBall = knockedDown;
+		}
 		
-		ballScores.set(fillingIndex, knockedDown);
+		
+		
 		fillingIndex ++;
+		
 	}
 	
 	public int score() {
-		System.out.println(ballScores);
+		System.out.println(frames);
 		System.out.println(fillingIndex);
-		int scoresSum = ballScores.stream().reduce((ballScore, sum)-> sum + ballScore).get();
-		for(int index = 0; index < this.fillingIndex-3; index ++) {
-			// -3 = -2 -1
-			// -2 because the 2 last not as the other have no bonus
-			// -1 because of the last added 1 (last incrementation)
-			
-			// Process spare
-			if(ballScores.get(index) == 0 && ballScores.get(index+1) == 10 ) {
-				scoresSum = scoresSum + ballScores.get(index+2) ;
-				index +=2; // skip the spare 10
-			}
-			
-			// Process strick
-			
-			else if(ballScores.get(index) == 10) {
-				scoresSum = scoresSum + ballScores.get(index+1) + ballScores.get(index+2);
-			}
+		int totalScore = 0;
+		for(Frame frameIteration: frames) {
+			totalScore += frameIteration.getScore();
 		}
-		return scoresSum;
+		
+		
+		
+		
+		return totalScore;
 	}
 	
+	
+	class Frame{
+		int firstBall ;
+		int secondBall;
+		
+		public int getScore() {
+			return firstBall + secondBall;
+		}
+		
+		public boolean isSpare() {
+			return firstBall != 10 && firstBall + secondBall == 10;
+		}
+		
+
+		@Override
+		public String toString() {
+			return "F[" + firstBall + ", " + secondBall + ", "+getScore()+"]";
+		}
+		
+	}
 	
 
 }
