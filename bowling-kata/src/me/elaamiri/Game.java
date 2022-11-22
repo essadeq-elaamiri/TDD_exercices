@@ -67,7 +67,9 @@ public class Game {
 				
 				if(frameIndex < 8) {
 					if(frames.get(frameIndex+1).isStrike()) {
-						frames.get(frameIndex).updateScore(frames.get(frameIndex+1).getScore() + frames.get(frameIndex+2).getScore());
+						//frames.get(frameIndex).updateScore(frames.get(frameIndex+1).getScore() + frames.get(frameIndex+2).getScore());
+						frames.get(frameIndex).updateScore(frames.get(frameIndex+1).getScore() + frames.get(frameIndex+2).getFirstBall());
+
 					}
 					else {
 						frames.get(frameIndex).updateScore(frames.get(frameIndex+1).getScore());

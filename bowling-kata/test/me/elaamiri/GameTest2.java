@@ -122,6 +122,43 @@ public class GameTest2 {
 		assertEquals(300, game.score());
 	}
 	
+	@Test
+	public void testAll() {
+		game.ball(2);
+		game.ball(0);//2
+		
+		game.ball(5);
+		game.ball(4);//11
+		
+		game.ball(5);
+		game.ball(5);//31
+		
+		game.ball(10); //50
+		
+		game.ball(10);
+		
+		game.ball(1);
+		game.ball(2); // 62
+		
+		game.ball(3);
+		game.ball(4); //69
+		
+		game.ball(5);
+		game.ball(4); //78
+		
+		game.ball(5);
+		game.ball(5); //92
+		
+		game.ball(10); // 114
+		//game.ball(6); //103
+		
+		game.ball(1); // 103
+		game.ball(2);
+		
+		
+		assertEquals(117, game.score());
+	}
+	
 	
 
 }
