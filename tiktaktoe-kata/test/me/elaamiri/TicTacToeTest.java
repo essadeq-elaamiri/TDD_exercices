@@ -79,6 +79,26 @@ public class TicTacToeTest {
 		assertEquals('O', game.winner());
 	}
 	
+	
+	@Test
+	public void noWinnerTest() {
+		game.play('X', 0, 0);
+		game.play('O', 1, 1);
+		game.play('X', 2, 2);
+		
+		game.play('O', 1, 0);
+		game.play('X', 1, 2);
+		game.play('O', 2, 0);
+		
+		game.play('O', 0, 2);
+		game.play('X', 2, 1);
+		game.play('O', 1, 2);
+		//game.play('X', 0, 0);
+		
+		assertEquals('O', game.winner());
+	}
+	
+	
 	//@Test
 	public void canGetHWinner() {
 		assertEquals('H', game.winner());

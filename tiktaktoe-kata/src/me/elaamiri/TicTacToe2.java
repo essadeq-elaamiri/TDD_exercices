@@ -1,6 +1,7 @@
+
 package me.elaamiri;
 
-public class TicTacToeGame {
+public class TicTacToe2 {
 	
 	private char [][] tictactoeGameMatrix = new char[3][3];
 	
@@ -9,6 +10,7 @@ public class TicTacToeGame {
 	}
 	
 	public char winner() {
+		
 		
 		if(checkColumGetWinner() != 0) return checkColumGetWinner();
 		if(checkRowGetWinner() != 0) return checkRowGetWinner();
