@@ -31,19 +31,73 @@ public class GameTest2 {
 	
 	@Test
 	public void testAllBalls1() {
-		for(int i=0; i< 10; i++) {
+		for(int i=0; i< 20; i++) {
 			game.ball(1);
 		}
 		assertEquals(20, game.score());
 	}
 	
+	
 	@Test
-	public void testSpare() {
-		for(int i=0; i< 10; i++) {
-			game.ball(1);
-		}
+	public void test1Spare() {
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		
+		game.ball(2);
+		game.ball(8); //spare
+		game.ball(0);
+		game.ball(0);
+		
+		assertEquals(10, game.score());
+	}
+	
+	@Test
+	public void test2Spare() {
+		game.ball(0);
+		game.ball(10);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		
+		game.ball(2);
+		game.ball(8); //spare
+		game.ball(0);
+		game.ball(0);
+		
 		assertEquals(20, game.score());
 	}
+	
+	@Test
+	public void test1Strike() {
+		game.ball(0);
+		game.ball(10);
+		
+		game.ball(10);
+		//game.ball(0);
+		
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		game.ball(0);
+		
+		game.ball(2);
+		game.ball(8); //spare
+		game.ball(0);
+		game.ball(0);
+		
+		assertEquals(40, game.score());
+	}
+	
+	// To be tested (Last strick and last spare)
 	
 
 }
