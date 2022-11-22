@@ -77,7 +77,7 @@ public class GameTest2 {
 	}
 	
 	@Test
-	public void test1Strike() {
+	public void test1Strike2Spares() {
 		game.ball(0);
 		game.ball(10);
 		
@@ -98,6 +98,30 @@ public class GameTest2 {
 	}
 	
 	// To be tested (Last strick and last spare)
+
+	@Test
+	public void testAllStricks() {
+		game.ball(10);
+		game.ball(10);
+		
+		game.ball(10);
+		
+		game.ball(10);
+		game.ball(10);
+		game.ball(10);
+		game.ball(10);
+		
+		game.ball(10);
+		game.ball(10); 
+		game.ball(10);
+		
+		// bonus 
+		game.ball(10);
+		game.ball(10);
+		
+		assertEquals(300, game.score());
+	}
+	
 	
 
 }

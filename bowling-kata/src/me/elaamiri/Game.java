@@ -6,16 +6,27 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
+import javax.security.auth.Refreshable;
+
 public class Game {
 
 	
 	private List<Integer> scores = new ArrayList<>();
 	private List<Frame> frames = new ArrayList<>();
+	private List<Integer> bonus = new ArrayList<Integer>();
 	private int fillingIndex = 0;
 	
 	public void ball(int knockedDown) {
-		scores.add(knockedDown);
-		if (fillingIndex % 2 == 0 && knockedDown == 10) scores.add(0);
+		if(fillingIndex<20) {
+			scores.add(knockedDown);
+			if (fillingIndex % 2 == 0 && knockedDown == 10) {
+				scores.add(0);
+				fillingIndex ++;
+			}
+		}
+		else {
+			bonus.add(knockedDown);
+		}
 		
 		fillingIndex ++;
 		
@@ -32,23 +43,39 @@ public class Game {
 		
 		
 		
-		
+		System.out.println("Bonus: "+ bonus);
 		System.out.println(frames);
 		System.out.println(fillingIndex);
 		
-		
-		
+		int bonusSum = 0;
+		if(!bonus.isEmpty())
+				bonusSum = bonus.stream().reduce((sum, bonusScore)-> sum + bonusScore).get();
 		// process spares
 		
 		for(int frameIndex = 0; frameIndex < frames.size(); frameIndex +=1) {
+			// the last 2 balls frame should not be processed
 			if(frames.get(frameIndex).isSpare()) {
-						
-				frames.get(frameIndex).updateScore(frames.get(frameIndex+1).getFirstBall());
-
+				if(frameIndex < 9) {
+					frames.get(frameIndex).updateScore(frames.get(frameIndex+1).getFirstBall());
+				}
+				else {
+					frames.get(frameIndex).updateScore(bonusSum);
+				}
+				
 			}
 			if(frames.get(frameIndex).isStrike()) {
 				
-				frames.get(frameIndex).updateScore(frames.get(frameIndex+1).getScore());
+				if(frameIndex < 8) {
+					if(frames.get(frameIndex+1).isStrike()) {
+						frames.get(frameIndex).updateScore(frames.get(frameIndex+1).getScore() + frames.get(frameIndex+2).getScore());
+					}
+					else {
+						frames.get(frameIndex).updateScore(frames.get(frameIndex+1).getScore());
+					}
+				}
+				else {
+					frames.get(frameIndex).updateScore(bonusSum);
+				}
 
 			}
 			
@@ -58,6 +85,9 @@ public class Game {
 		for(Frame frameIteration: frames) {
 			totalScore += frameIteration.getScore();
 		}
+		
+		System.out.println(frames);
+
 		
 		return totalScore;
 	}
