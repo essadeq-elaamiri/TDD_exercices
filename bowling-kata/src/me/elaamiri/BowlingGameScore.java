@@ -1,5 +1,5 @@
 package me.elaamiri;
-
+// https://codereview.stackexchange.com/questions/224368/bowling-kata-in-java
 class BowlingGameScore {
 
     private int[] pinsKnockedDown = new int[21];
